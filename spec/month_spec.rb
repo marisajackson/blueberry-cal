@@ -5,12 +5,12 @@ RSpec.describe Month do
 
     it "matches cal for December 2012" do
       month = Month.new(12, 2012)
-      month.header.should == "   December 2012"
+      month.header.should == "   December 2012    "
     end
 
     it "matches cal for July 1901" do
       month = Month.new(07, 1901)
-      month.header.should == "     July 1901"
+      month.header.should == "     July 1901      "
     end
 
   end
@@ -104,25 +104,25 @@ RSpec.describe Month do
 
   context ".fifth_week" do
     it "should return fifth week for Feb 2015" do
-      Month.new(2, 2015).fifth_week.should == ""
+      Month.new(2, 2015).fifth_week.should == "                    "
     end
     it "should return fifth week for July 2017" do
       Month.new(7, 2017).fifth_week.should == "23 24 25 26 27 28 29"
     end
     it "should return fifth week for February 1900" do
-      Month.new(2, 1900).fifth_week.should == "25 26 27 28"
+      Month.new(2, 1900).fifth_week.should == "25 26 27 28         "
     end
   end
 
   context ".sixth_week" do
     it "should return sixth week for Feb 2015" do
-      Month.new(2, 2015).sixth_week.should == ""
+      Month.new(2, 2015).sixth_week.should == "                    "
     end
     it "should return sixth week for July 2017" do
-      Month.new(7, 2017).sixth_week.should == "30 31"
+      Month.new(7, 2017).sixth_week.should == "30 31               "
     end
     it "should return sixth week for February 1900" do
-      Month.new(2, 1900).sixth_week.should == ""
+      Month.new(2, 1900).sixth_week.should == "                    "
     end
   end
 

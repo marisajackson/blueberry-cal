@@ -1,4 +1,5 @@
 require_relative 'Zellers'
+require_relative 'year'
 
 class Month
 
@@ -6,7 +7,7 @@ class Month
 
   def initialize(month, year)
     @month = month
-    @year = year
+    @year = year.to_i
   end
 
   def first_day_position
@@ -71,27 +72,27 @@ class Month
   def fifth_week
     first_day = self.first_day_position
     sunday = 30 - first_day
-    return "" if sunday > self.length
+    return "".ljust(20) if sunday > self.length
     fourth_week = "#{sunday}".rjust(2)
     sunday += 1
     sunday.upto(self.length) do |j|
       break if j > sunday + 5
       fourth_week << "#{j}".rjust(3)
     end
-    fourth_week
+    fourth_week.ljust(20)
   end
 
   def sixth_week
     first_day = self.first_day_position
     sunday = 37 - first_day
-    return "" if sunday > self.length
+    return "".ljust(20) if sunday > self.length
     sixth_week = "#{sunday}".rjust(2)
     sunday += 1
     sunday.upto(self.length) do |j|
       break if j > sunday + 5
       sixth_week << "#{j}".rjust(3)
     end
-    sixth_week
+    sixth_week.ljust(20)
   end
 
   def name
@@ -99,7 +100,7 @@ class Month
   end
 
   def header
-    "#{name} #{@year}".center(20).rstrip
+    "#{name} #{@year}".center(20)
   end
 
   def length
@@ -111,7 +112,7 @@ class Month
   end
 
   def to_s
-    output = header
+    output = header.rstrip
     output << "\nSu Mo Tu We Th Fr Sa\n"
     output << first_week
     output << "\n"
@@ -121,9 +122,9 @@ class Month
     output << "\n"
     output << fourth_week
     output << "\n"
-    output << fifth_week
+    output << fifth_week.rstrip
     output << "\n"
-    output << sixth_week
+    output << sixth_week.rstrip
     output << "\n"
 
     output

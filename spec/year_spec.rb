@@ -18,4 +18,16 @@ RSpec.describe Year do
       Year.leap?(2100).should == false
     end
   end
+
+  context "header" do
+    it "matches cal for 2012" do
+      year = Year.new(2012)
+      year.header.should == "                             2012\n\n"
+    end
+    it "matches cal for 1999" do
+      year = Year.new(1999)
+      year.header.should == "                             1999\n\n"
+    end
+  end
+
 end
