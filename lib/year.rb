@@ -60,7 +60,7 @@ class Year
     weeks
   end
 
-  def week_twos
+  def weeks(x)
     weeks = []
     group = ""
     0.upto(11) do |i|
@@ -68,75 +68,7 @@ class Year
         weeks << group
         group = ""
       end
-      group << @months[i].second_week
-      group << "\s\s"
-      if i == 11
-        weeks << group
-      end
-    end
-    weeks
-  end
-
-  def week_threes
-    weeks = []
-    group = ""
-    0.upto(11) do |i|
-      if i == 3 || i == 6 || i == 9
-        weeks << group
-        group = ""
-      end
-      group << @months[i].third_week
-      group << "\s\s"
-      if i == 11
-        weeks << group
-      end
-    end
-    weeks
-  end
-
-  def week_fours
-    weeks = []
-    group = ""
-    0.upto(11) do |i|
-      if i == 3 || i == 6 || i == 9
-        weeks << group
-        group = ""
-      end
-      group << @months[i].fourth_week
-      group << "\s\s"
-      if i == 11
-        weeks << group
-      end
-    end
-    weeks
-  end
-
-  def week_fives
-    weeks = []
-    group = ""
-    0.upto(11) do |i|
-      if i == 3 || i == 6 || i == 9
-        weeks << group
-        group = ""
-      end
-      group << @months[i].fifth_week
-      group << "\s\s"
-      if i == 11
-        weeks << group
-      end
-    end
-    weeks
-  end
-
-  def week_sixes
-    weeks = []
-    group = ""
-    0.upto(11) do |i|
-      if i == 3 || i == 6 || i == 9
-        weeks << group
-        group = ""
-      end
-      group << @months[i].sixth_week
+      group << @months[i].week(x)
       group << "\s\s"
       if i == 11
         weeks << group
@@ -147,68 +79,18 @@ class Year
 
   def to_s
     string = self.header
-    string << self.month_headers[0].rstrip
-    string << "\nSu Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa\n"
-    string << self.week_ones[0].rstrip
-    string << "\n"
-    string << self.week_twos[0].rstrip
-    string << "\n"
-    string << self.week_threes[0].rstrip
-    string << "\n"
-    string << self.week_fours[0].rstrip
-    string << "\n"
-    string << self.week_fives[0].rstrip
-    string << "\n"
-    string << self.week_sixes[0].rstrip
-    string << "\n"
 
-    string << self.month_headers[1].rstrip
-    string << "\nSu Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa\n"
-    string << self.week_ones[1].rstrip
-    string << "\n"
-    string << self.week_twos[1].rstrip
-    string << "\n"
-    string << self.week_threes[1].rstrip
-    string << "\n"
-    string << self.week_fours[1].rstrip
-    string << "\n"
-    string << self.week_fives[1].rstrip
-    string << "\n"
-    string << self.week_sixes[1].rstrip
-    string << "\n"
-
-    string << self.month_headers[2].rstrip
-    string << "\nSu Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa\n"
-    string << self.week_ones[2].rstrip
-    string << "\n"
-    string << self.week_twos[2].rstrip
-    string << "\n"
-    string << self.week_threes[2].rstrip
-    string << "\n"
-    string << self.week_fours[2].rstrip
-    string << "\n"
-    string << self.week_fives[2].rstrip
-    string << "\n"
-    string << self.week_sixes[2].rstrip
-    string << "\n"
-
-    string << self.month_headers[3].rstrip
-    string << "\nSu Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa\n"
-    string << self.week_ones[3].rstrip
-    string << "\n"
-    string << self.week_twos[3].rstrip
-    string << "\n"
-    string << self.week_threes[3].rstrip
-    string << "\n"
-    string << self.week_fours[3].rstrip
-    string << "\n"
-    string << self.week_fives[3].rstrip
-    string << "\n"
-    string << self.week_sixes[3].rstrip
-    string << "\n"
+    0.upto(3) do |i|
+      string << self.month_headers[i].rstrip
+      string << "\nSu Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa\n"
+      string << self.week_ones[i].rstrip
+      string << "\n"
+      2.upto(6) do |j|
+        string << self.weeks(j)[i].rstrip
+        string << "\n"
+      end
+    end
 
     string
   end
-
-
 end

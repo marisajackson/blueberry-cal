@@ -4,95 +4,55 @@ require_relative 'year'
 class Month
 
   MONTHS = [nil, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  DAY_WIDTH = 3
+  MONTH_WIDTH = 20
+  WEEK_LENGTH = 7
 
   def initialize(month, year)
     @month = month
     @year = year.to_i
   end
 
-  def first_day_position
-    first_day = Zellers.calculate(@month, 1, @year)
-    if first_day == 0
-      first_day = 7
+  def first_weekday_position
+    first_weekday = Zellers.calculate(@month, 1, @year)
+    if first_weekday == 0
+      first_weekday = 7
     end
-    first_day
+    first_weekday
   end
 
   def first_week
-    first_day = self.first_day_position
-    spaces = 3
+    first_weekday = self.first_weekday_position
     first_week = ""
-    1.upto(7) do |i|
-      if i == first_day
-        first_week << "1".rjust((spaces * (i)) -1)
+    1.upto(WEEK_LENGTH) do |i|
+      if i == first_weekday
+        first_week << "1".rjust((DAY_WIDTH * (i)) -1)
       end
     end
 
-    2.upto(7) do |j|
-      first_day += 1
-      break if first_day > 7
-      first_week << "#{j}".rjust(3)
+    2.upto(WEEK_LENGTH) do |j|
+      first_weekday += 1
+      break if first_weekday > WEEK_LENGTH
+      first_week << "#{j}".rjust(DAY_WIDTH)
     end
     first_week
   end
 
-  def second_week
-    first_day = self.first_day_position
-    sunday = 9 - first_day
-    second_week = "#{sunday}".rjust(2)
+  def sunday(x)
+    first_weekday = self.first_weekday_position
+    sunday = (2 + (WEEK_LENGTH*(x-1))) - first_weekday
+  end
+
+  def week(x)
+    sunday = self.sunday(x)
+    return "".ljust(MONTH_WIDTH) if sunday > self.length
+    week = "#{sunday}".rjust(2)
     sunday += 1
     sunday.upto(sunday + 5) do |j|
-      second_week << "#{j}".rjust(3)
+      break if j > self.length
+      week << "#{j}".rjust(DAY_WIDTH)
     end
-    second_week
-  end
-
-  def third_week
-    first_day = self.first_day_position
-    sunday = 16 - first_day
-    third_week = "#{sunday}".rjust(2)
-    sunday += 1
-    sunday.upto(sunday + 5) do |j|
-      third_week << "#{j}".rjust(3)
-    end
-    third_week
-  end
-
-  def fourth_week
-    first_day = self.first_day_position
-    sunday = 23 - first_day
-    fourth_week = "#{sunday}".rjust(2)
-    sunday += 1
-    sunday.upto(sunday + 5) do |j|
-      fourth_week << "#{j}".rjust(3)
-    end
-    fourth_week
-  end
-
-  def fifth_week
-    first_day = self.first_day_position
-    sunday = 30 - first_day
-    return "".ljust(20) if sunday > self.length
-    fourth_week = "#{sunday}".rjust(2)
-    sunday += 1
-    sunday.upto(self.length) do |j|
-      break if j > sunday + 5
-      fourth_week << "#{j}".rjust(3)
-    end
-    fourth_week.ljust(20)
-  end
-
-  def sixth_week
-    first_day = self.first_day_position
-    sunday = 37 - first_day
-    return "".ljust(20) if sunday > self.length
-    sixth_week = "#{sunday}".rjust(2)
-    sunday += 1
-    sunday.upto(self.length) do |j|
-      break if j > sunday + 5
-      sixth_week << "#{j}".rjust(3)
-    end
-    sixth_week.ljust(20)
+    week.ljust(MONTH_WIDTH)
   end
 
   def name
@@ -116,19 +76,12 @@ class Month
     output << "\nSu Mo Tu We Th Fr Sa\n"
     output << first_week
     output << "\n"
-    output << second_week
-    output << "\n"
-    output << third_week
-    output << "\n"
-    output << fourth_week
-    output << "\n"
-    output << fifth_week.rstrip
-    output << "\n"
-    output << sixth_week.rstrip
-    output << "\n"
+    2.upto(6) do |i|
+      output << week(i)
+      output << "\n"
+    end
 
     output
-
   end
 
 end

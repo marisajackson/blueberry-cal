@@ -68,61 +68,61 @@ RSpec.describe Month do
 
   context ".second_week" do
     it "should return second week for Feb 2015" do
-      Month.new(2, 2015).second_week.should == " 8  9 10 11 12 13 14"
+      Month.new(2, 2015).week(2).should == " 8  9 10 11 12 13 14"
     end
     it "should return second week for July 2017" do
-      Month.new(7, 2017).second_week.should == " 2  3  4  5  6  7  8"
+      Month.new(7, 2017).week(2).should == " 2  3  4  5  6  7  8"
     end
     it "should return second week for February 1900" do
-      Month.new(2, 1900).second_week.should == " 4  5  6  7  8  9 10"
+      Month.new(2, 1900).week(2).should == " 4  5  6  7  8  9 10"
     end
   end
 
   context ".third_week" do
     it "should return third week for Feb 2015" do
-      Month.new(2, 2015).third_week.should == "15 16 17 18 19 20 21"
+      Month.new(2, 2015).week(3).should == "15 16 17 18 19 20 21"
     end
     it "should return third week for July 2017" do
-      Month.new(7, 2017).third_week.should == " 9 10 11 12 13 14 15"
+      Month.new(7, 2017).week(3).should == " 9 10 11 12 13 14 15"
     end
     it "should return third week for February 1900" do
-      Month.new(2, 1900).third_week.should == "11 12 13 14 15 16 17"
+      Month.new(2, 1900).week(3).should == "11 12 13 14 15 16 17"
     end
   end
 
   context ".fourth_week" do
     it "should return fourth week for Feb 2015" do
-      Month.new(2, 2015).fourth_week.should == "22 23 24 25 26 27 28"
+      Month.new(2, 2015).week(4).should == "22 23 24 25 26 27 28"
     end
     it "should return fourth week for July 2017" do
-      Month.new(7, 2017).fourth_week.should == "16 17 18 19 20 21 22"
+      Month.new(7, 2017).week(4).should == "16 17 18 19 20 21 22"
     end
     it "should return fourth week for February 1900" do
-      Month.new(2, 1900).fourth_week.should == "18 19 20 21 22 23 24"
+      Month.new(2, 1900).week(4).should == "18 19 20 21 22 23 24"
     end
   end
 
   context ".fifth_week" do
     it "should return fifth week for Feb 2015" do
-      Month.new(2, 2015).fifth_week.should == "                    "
+      Month.new(2, 2015).week(5).should == "                    "
     end
     it "should return fifth week for July 2017" do
-      Month.new(7, 2017).fifth_week.should == "23 24 25 26 27 28 29"
+      Month.new(7, 2017).week(5).should == "23 24 25 26 27 28 29"
     end
     it "should return fifth week for February 1900" do
-      Month.new(2, 1900).fifth_week.should == "25 26 27 28         "
+      Month.new(2, 1900).week(5).should == "25 26 27 28         "
     end
   end
 
   context ".sixth_week" do
     it "should return sixth week for Feb 2015" do
-      Month.new(2, 2015).sixth_week.should == "                    "
+      Month.new(2, 2015).week(6).should == "                    "
     end
     it "should return sixth week for July 2017" do
-      Month.new(7, 2017).sixth_week.should == "30 31               "
+      Month.new(7, 2017).week(6).should == "30 31               "
     end
     it "should return sixth week for February 1900" do
-      Month.new(2, 1900).sixth_week.should == "                    "
+      Month.new(2, 1900).week(6).should == "                    "
     end
   end
 
